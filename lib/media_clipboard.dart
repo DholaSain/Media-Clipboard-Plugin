@@ -8,16 +8,28 @@ import 'package:flutter/services.dart';
 //     return MediaClipboardPlatform.instance.getPlatformVersion();
 //   }
 // }
-class ClipboardPlugin {
-  static const MethodChannel _channel = MethodChannel('media_clipboard');
+// class ClipboardPlugin {
+//   static const MethodChannel _channel = MethodChannel('media_clipboard');
 
-  static Future<void> copyImage(String imagePath) async {
+//   static Future<void> copyImage(String imagePath) async {
+//     try {
+//       await _channel.invokeMethod('copyImage', {'imagePath': imagePath});
+//     } on PlatformException catch (e) {
+//       if (kDebugMode) {
+//         print('Failed to copy image: ${e.message}');
+//       }
+//     }
+//   }
+// }
+
+class MediaClipboard {
+  static const MethodChannel _channel = MethodChannel('com.dholasain.media_clipboard');
+
+  static Future<void> copyMediaToClipboard(String filePath) async {
     try {
-      await _channel.invokeMethod('copyImage', {'imagePath': imagePath});
+      await _channel.invokeMethod('copyMediaToClipboard', filePath);
     } on PlatformException catch (e) {
-      if (kDebugMode) {
-        print('Failed to copy image: ${e.message}');
-      }
+      print('Failed to copy media to clipboard: ${e.message}');
     }
   }
 }
