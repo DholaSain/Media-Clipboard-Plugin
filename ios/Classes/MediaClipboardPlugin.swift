@@ -8,7 +8,7 @@ public class MediaClipboardPlugin: NSObject, FlutterPlugin {
       
   public static func register(with registrar: FlutterPluginRegistrar) {
     let channel = FlutterMethodChannel(name: "media_clipboard", binaryMessenger: registrar.messenger())
-    let instance = SwiftClipboardPlugin()
+    let instance = MediaClipboardPlugin()
     registrar.addMethodCallDelegate(instance, channel: channel)
   }
 
