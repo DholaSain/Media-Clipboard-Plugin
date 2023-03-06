@@ -31,11 +31,11 @@ public class MediaClipboardPlugin implements FlutterPlugin, MethodCallHandler {
 
   public static void registerWith(PluginRegistry.Registrar registrar) {
     MethodChannel channel = new MethodChannel(registrar.messenger(), CHANNEL_NAME);
-    ClipboardPlugin instance = new ClipboardPlugin(registrar);
+    MediaClipboardPlugin instance = new MediaClipboardPlugin(registrar);
     channel.setMethodCallHandler(instance);
   }
 
-  private ClipboardPlugin(PluginRegistry.Registrar registrar) {
+  private MediaClipboardPlugin(PluginRegistry.Registrar registrar) {
     this.registrar = registrar;
   }
 
