@@ -1,35 +1,35 @@
-import 'package:flutter/foundation.dart';
+import 'dart:async';
+
 import 'package:flutter/services.dart';
 
-// import 'media_clipboard_platform_interface.dart';
-
-// class MediaClipboard {
-//   Future<String?> getPlatformVersion() {
-//     return MediaClipboardPlatform.instance.getPlatformVersion();
-//   }
-// }
-// class ClipboardPlugin {
-//   static const MethodChannel _channel = MethodChannel('media_clipboard');
-
-//   static Future<void> copyImage(String imagePath) async {
-//     try {
-//       await _channel.invokeMethod('copyImage', {'imagePath': imagePath});
-//     } on PlatformException catch (e) {
-//       if (kDebugMode) {
-//         print('Failed to copy image: ${e.message}');
-//       }
-//     }
-//   }
-// }
-
 class MediaClipboard {
-  static const MethodChannel _channel = MethodChannel('com.dholasain.media_clipboard');
+  static const MethodChannel _channel = MethodChannel('com.dholasain.media_plugin');
 
-  static Future<void> copyMediaToClipboard(String filePath) async {
+  static Future<void> copyImageToClipboard(String base64Data) async {
     try {
-      await _channel.invokeMethod('copyMediaToClipboard', filePath);
+      final Map<String, dynamic> params = {'base64Data': base64Data, 'mimeType': 'image/png'};
+      await _channel.invokeMethod('copyImageToClipboard', params);
     } on PlatformException catch (e) {
-      print('Failed to copy media to clipboard: ${e.message}');
+      print(e.message);
+      // throw e.message;
+    }
+  }
+
+  static Future<void> copyGifToClipboard(String base64Data) async {
+    try {
+      final Map<String, dynamic> params = {'base64Data': base64Data, 'mimeType': 'image/gif'};
+      await _channel.invokeMethod('copyGifToClipboard', params);
+    } on PlatformException catch (e) {
+      print(e.message);
+    }
+  }
+
+  static Future<void> copyWebpToClipboard(String base64Data) async {
+    try {
+      final Map<String, dynamic> params = {'base64Data': base64Data, 'mimeType': 'image/webp'};
+      await _channel.invokeMethod('copyWebpToClipboard', params);
+    } on PlatformException catch (e) {
+      print(e.message);
     }
   }
 }
